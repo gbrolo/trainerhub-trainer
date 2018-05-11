@@ -11,6 +11,9 @@ import CompleteProfile from '../modules/auth/scenes/CompleteProfile';
 import Login from '../modules/auth/scenes/Login';
 import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
 import Home from '../modules/home/scenes/Home';
+import AddTrainee from '../modules/home/scenes/AddTrainee';
+import TraineeSummary from '../modules/home/scenes/TraineeSummary';
+import AddTraining from '../modules/home/scenes/AddTraining';
 
 //Import Store, actions
 import store from '../redux/store'
@@ -55,7 +58,10 @@ export default class extends React.Component {
                     </Stack>
 
                     <Stack key="Main" initial={this.state.isLoggedIn}>
-                        <Scene key="Home" component={Home} title="Entrenamiento" initial={true} type={ActionConst.REPLACE}/>
+                        <Scene key="Home" component={Home} title="Mis Atletas" initial={true} back={false}/>
+                        <Scene key="AddTrainee" component={AddTrainee} title="Agregar Atleta" back={false}/>
+                        <Scene key="TraineeSummary" component={TraineeSummary} title="Información del atleta"/>
+                        <Scene key="AddTraining" component={AddTraining} title="Nuevo entrenamiento"/>
                     </Stack>
                 </Scene>
             </Router>

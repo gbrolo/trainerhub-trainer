@@ -40,37 +40,26 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily.medium
     },
 
-    tabbar:{
-        backgroundColor: "#2c3847",
-        margin: 0,
-        padding: 0
-    },
-
-    buttonTextTabBar:{
-        fontSize: fontSize.small,
-        fontFamily: fontFamily.regular,
-        color: color.white
-    },
-
-    buttonTabBar:{
-        backgroundColor: "#2c3847",
-        borderWidth: 0,
-        borderRadius: 0
-    },
-
-    traineeList: {
+    infoText:{
+        padding: 20,
+        color: color.white,
         margin: 20,
-        backgroundColor: "#2c3847"
+        backgroundColor: "#2c3847",
+        borderRadius: 5
     },
 
-    traineeListTitle: {
-        color: color.white
+    txt:{
+        color: color.white,
+        textAlign: "justify",
+        marginTop: 10
     },
 
-    traineeListOverrideBorder: {
-        borderColor: "#2c3847",
-        borderRadius: 5,
-        borderWidth: 0
+    titleTxt: {
+        fontSize: fontSize.regular + 4,
+        fontFamily: fontFamily.bold,
+        textAlign: "center",
+        color: "#f0f0f0",
+        marginTop: 10
     }
 });
 
