@@ -26,9 +26,16 @@ class Home extends React.Component {
                     trainings: [
                         {
                           tname: 'Abdominales',
-                          tdailyDuration: 60,
+                          tdailyDuration: 5,
                           tcomments: '',
-                          treps: 20
+                          treps: 20,
+                          tsets: 2
+                        }
+                    ],
+                    plans: [
+                        {
+                          pname: 'Proteina',
+                          pdescription: ''
                         }
                     ]
                 },

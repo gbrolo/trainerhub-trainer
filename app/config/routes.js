@@ -14,6 +14,7 @@ import Home from '../modules/home/scenes/Home';
 import AddTrainee from '../modules/home/scenes/AddTrainee';
 import TraineeSummary from '../modules/home/scenes/TraineeSummary';
 import AddTraining from '../modules/home/scenes/AddTraining';
+import AddPlan from '../modules/home/scenes/AddPlan';
 
 //Import Store, actions
 import store from '../redux/store'
@@ -62,6 +63,7 @@ export default class extends React.Component {
                         <Scene key="AddTrainee" component={AddTrainee} title="Agregar Atleta" back={false}/>
                         <Scene key="TraineeSummary" component={TraineeSummary} title="Información del atleta"/>
                         <Scene key="AddTraining" component={AddTraining} title="Nuevo entrenamiento"/>
+                        <Scene key="AddPlan" component={AddPlan} title="Nuevo plan alimenticio"/>
                     </Stack>
                 </Scene>
             </Router>

@@ -19,7 +19,8 @@ class AddTraining extends React.Component {
             tname: '',
             tdailyDuration: 0,
             tcomments: '',
-            treps: 0
+            treps: 0,
+            tsets: 0
         }
 
         this.goHome = this.goHome.bind(this);
@@ -36,7 +37,8 @@ class AddTraining extends React.Component {
             tname: this.state.tname,
             tdailyDuration: this.state.tdailyDuration,
             tcomments: this.state.tcomments,
-            treps: this.state.treps
+            treps: this.state.treps,
+            tsets: this.state.tsets
         }
         currentTrainings.push(newTraining)
         console.log('trainings', currentTrainings);
@@ -51,6 +53,9 @@ class AddTraining extends React.Component {
 
                 <FormLabel>Repeticiones</FormLabel>
                 <FormInput onChangeText={(value) => this.setState({ treps: value })}/>
+
+                <FormLabel>Sets</FormLabel>
+                <FormInput onChangeText={(value) => this.setState({ tsets: value })}/>
 
                 <FormLabel>Duración diaria (en minutos)</FormLabel>
                 <FormInput onChangeText={(value) => this.setState({ tdailyDuration: value })}/>

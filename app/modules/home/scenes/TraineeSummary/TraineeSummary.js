@@ -19,6 +19,7 @@ class TraineeSummary extends React.Component {
         }
 
         this.addTraining = this.addTraining.bind(this);
+        this.addPlan = this.addPlan.bind(this);
     }
 
     onError(error) {
@@ -27,6 +28,10 @@ class TraineeSummary extends React.Component {
 
     addTraining() {
         Actions.AddTraining({ uid: this.props.traineeInfo.uid, trainings: this.props.traineeInfo.trainings });
+    }
+
+    addPlan() {
+        Actions.AddPlan({ uid: this.props.traineeInfo.uid, plans: this.props.traineeInfo.plans })
     }
 
     render() {
@@ -49,6 +54,15 @@ class TraineeSummary extends React.Component {
                     buttonStyle={[styles.button]}
                     textStyle={styles.buttonText}
                     onPress={this.addTraining}/>
+
+                <Button
+                    raised
+                    borderRadius={4}
+                    title={'AGREGAR PLAN ALIMENTICIO'}
+                    containerViewStyle={[styles.containerView]}
+                    buttonStyle={[styles.button]}
+                    textStyle={styles.buttonText}
+                    onPress={this.addPlan}/>
             </View>
         );
     }
