@@ -18,38 +18,7 @@ class Home extends React.Component {
     constructor(){
         super();
         this.state = {
-            traineeList: [
-                {
-                    uid: 'jmYobAHo9TfKq8LzkJFkoS3X1eQ2',
-                    username: 'Trainee 1',
-                    age: 21,
-                    height: 175,
-                    weight: 140.5,
-                    trainings: [
-                        {
-                          tname: 'Abdominales',
-                          tdailyDuration: 5,
-                          tcomments: '',
-                          treps: 20,
-                          tsets: 2
-                        }
-                    ],
-                    plans: [
-                        {
-                          pname: 'Proteina',
-                          pdescription: ''
-                        }
-                    ]
-                },
-                {
-                    uid: 'g9nvGTN3DKdwEQZqVOQ56f3zCaD3',
-                    username: 'Trainee 40',
-                    age: 35,
-                    height: 187,
-                    weight: 198,
-                    trainings: []
-                }
-            ]
+            traineeList: []
         }
         this.onSignOut = this.onSignOut.bind(this);
         this.showTraineeSummary = this.showTraineeSummary.bind(this);
