@@ -1,6 +1,8 @@
+/*jshint esversion: 6 */
+
 import * as t from './actionTypes';
 import * as api from './api';
-import { auth } from "../../config/firebase";
+import { auth, database} from "../../config/firebase";
 
 import { AsyncStorage } from 'react-native';
 
@@ -8,7 +10,7 @@ export function register(data, successCB, errorCB) {
     return (dispatch) => {
         api.register(data, function (success, data, error) {
             if (success) successCB(data);
-            else if (error) errorCB(error)
+            else if (error) errorCB(error);
         });
     };
 }
@@ -19,7 +21,7 @@ export function createUser(user, successCB, errorCB) {
             if (success) {
                 dispatch({type: t.LOGGED_IN, data: user});
                 successCB();
-            }else if (error) errorCB(error)
+            }else if (error) errorCB(error);
         });
     };
 }
@@ -28,9 +30,11 @@ export function login(data, successCB, errorCB) {
     return (dispatch) => {
         api.login(data, function (success, data, error) {
             if (success) {
+                // Save token and data to AsyncStorage
+                AsyncStorage.setItem('user', JSON.stringify(data.user));
                 if (data.exists) dispatch({type: t.LOGGED_IN, data: data.user});
                 successCB(data);
-            }else if (error) errorCB(error)
+            }else if (error) errorCB(error);
         });
     };
 }
@@ -39,7 +43,7 @@ export function resetPassword(data, successCB, errorCB) {
     return (dispatch) => {
         api.resetPassword(data, function (success, data, error) {
             if (success) successCB();
-            else if (error) errorCB(error)
+            else if (error) errorCB(error);
         });
     };
 }
@@ -50,7 +54,7 @@ export function signOut(successCB, errorCB) {
             if (success) {
                 dispatch({type: t.LOGGED_OUT});
                 successCB();
-            }else if (error) errorCB(error)
+            }else if (error) errorCB(error);
         });
     };
 }
@@ -63,8 +67,8 @@ export function checkLoginStatus(callback) {
             if (isLoggedIn) {
                 //get the user object from the Async storage
                 AsyncStorage.getItem('user', (err, user) => {
-                    if (user === null) isLoggedIn = false //set the loggedIn value to false
-                    else dispatch({type: t.LOGGED_IN, data: JSON.parse(user)})
+                    if (user === null) isLoggedIn = false; //set the loggedIn value to false
+                    else dispatch({type: t.LOGGED_IN, data: JSON.parse(user)});
 
                     callback(isLoggedIn);
                 });
@@ -82,7 +86,11 @@ export function signInWithFacebook(facebookToken, successCB, errorCB) {
             if (success) {
                 if (data.exists) dispatch({type: t.LOGGED_IN, data: data.user});
                 successCB(data);
-            }else if (error) errorCB(error)
+            }else if (error) errorCB(error);
         });
     };
 }
+
+
+
+

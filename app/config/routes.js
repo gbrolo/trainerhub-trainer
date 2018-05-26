@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
@@ -17,7 +19,7 @@ import AddTraining from '../modules/home/scenes/AddTraining';
 import AddPlan from '../modules/home/scenes/AddPlan';
 
 //Import Store, actions
-import store from '../redux/store'
+import store from '../redux/store';
 import { checkLoginStatus } from "../modules/auth/actions";
 
 import { color, navTitleStyle } from "../styles/theme";
@@ -28,7 +30,7 @@ export default class extends React.Component {
         this.state = {
             isReady: false,
             isLoggedIn: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -40,7 +42,7 @@ export default class extends React.Component {
 
     render() {
         if (!this.state.isReady)
-            return <Splash/>
+            return <Splash/>;
 
         return (
             <Router>

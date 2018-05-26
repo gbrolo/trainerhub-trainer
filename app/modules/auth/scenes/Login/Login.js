@@ -1,11 +1,13 @@
+/*jshint esversion: 6 */
+
 import React from 'react';
 
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
-import {actions as auth} from "../../index"
+import {actions as auth} from "../../index";
 
-import Form from "../../components/Form"
+import Form from "../../components/Form";
 
 const {login} = auth;
 
@@ -34,14 +36,14 @@ const error = {
     general: "",
     email: "",
     password: ""
-}
+};
 
 class Login extends React.Component {
     constructor() {
         super();
         this.state = {
             error: error
-        }
+        };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onSuccess = this.onSuccess.bind(this);
@@ -49,18 +51,18 @@ class Login extends React.Component {
     }
 
     onForgotPassword() {
-        Actions.ForgotPassword()
+        Actions.ForgotPassword();
     }
 
     onSubmit(data) {
         this.setState({error: error}); //clear out error messages
 
-        this.props.login(data, this.onSuccess, this.onError)
+        this.props.login(data, this.onSuccess, this.onError);
     }
 
     onSuccess({exists, user}) {
-        if (exists) Actions.Main()
-        else Actions.CompleteProfile({user})
+        if (exists) Actions.Main();
+        else Actions.CompleteProfile({user});
     }
 
     onError(error) {
@@ -72,7 +74,7 @@ class Login extends React.Component {
             let keys = Object.keys(error);
             keys.map((key, index) => {
                 errObj[key] = error[key];
-            })
+            });
         }
         this.setState({error: errObj});
     }

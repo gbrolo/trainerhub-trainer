@@ -1,10 +1,12 @@
+/*jshint esversion: 6 */
+
 import { auth, database, provider } from "../../config/firebase";
 
 //Register the user using email and password
 export function register(data, callback) {
     const { email, password } = data;
     auth.createUserWithEmailAndPassword(email, password)
-        .then((user) => callback(true, user, null))
+        .then((resp) => callback(true, resp.user, null))
         .catch((error) => callback(false, null, error));
 }
 
@@ -19,7 +21,7 @@ export function createUser (user, callback) {
 export function login(data, callback) {
     const { email, password } = data;
     auth.signInWithEmailAndPassword(email, password)
-        .then((user) => getUser(user, callback))
+        .then((resp) => getUser(resp.user, callback))
         .catch((error) => callback(false, null, error));
 }
 
@@ -33,7 +35,7 @@ export function getUser(user, callback) {
             //if the user exist in the DB, replace the user variable with the returned snapshot
             if (exists) user = snapshot.val();
 
-            const data = { exists, user }
+            const data = { exists, user };
             callback(true, data, null);
         })
         .catch(error => callback(false, null, error));
@@ -50,10 +52,10 @@ export function resetPassword(data, callback) {
 export function signOut (callback) {
     auth.signOut()
         .then(() => {
-            if (callback) callback(true, null, null)
+            if (callback) callback(true, null, null);
         })
         .catch((error) => {
-            if (callback) callback(false, null, error)
+            if (callback) callback(false, null, error);
         });
 }
 

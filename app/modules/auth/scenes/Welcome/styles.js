@@ -1,5 +1,7 @@
+/*jshint esversion: 6 */
+
 import { StyleSheet } from 'react-native';
-import { theme } from "../../index"
+import { theme } from "../../index";
 const { padding, color, fontSize, fontFamily, windowWidth, normalize } = theme;
 
 const resizeMode = 'contain';
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
         fontSize: fontSize.large + 2,
         lineHeight: fontSize.large + 4,
         fontFamily: fontFamily.bold,
-        color: "#66FCF1",
+        color: "#FFF",
         letterSpacing: 1
     },
 

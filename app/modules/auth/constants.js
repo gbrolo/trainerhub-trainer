@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import {FACEBOOK_APP_ID as fbID} from "../../config/constants"
 
 export const NAME = 'auth';

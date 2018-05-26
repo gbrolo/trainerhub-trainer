@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { AsyncStorage } from 'react-native';
 
 import * as t from './actionTypes';
@@ -10,10 +12,6 @@ const authReducer = (state = initialState, action) => {
             const user = action.data;
 
             // Save token and data to Asyncstorage
-            AsyncStorage.multiSet([
-                ['user', JSON.stringify(user)]
-            ]);
-
             state = Object.assign({}, state, { isLoggedIn: true, user: user });
 
             return state;
