@@ -3,11 +3,13 @@ var { View, StyleSheet, Alert } = require('react-native');
 
 import {Button, ButtonGroup, List, ListItem} from 'react-native-elements'
 import {Actions} from 'react-native-router-flux';
+import { AsyncStorage } from 'react-native';
 import {connect} from 'react-redux';
 
 import styles from "./styles"
 
 import { actions as auth, theme } from "../../../auth/index"
+import { database, provider } from "../../../../config/firebase";
 const { signOut } = auth;
 
 const { color } = theme;
@@ -41,7 +43,7 @@ class Home extends React.Component {
                 },
                 {
                     uid: 'g9nvGTN3DKdwEQZqVOQ56f3zCaD3',
-                    username: 'Trainee 2',
+                    username: 'Trainee 40',
                     age: 35,
                     height: 187,
                     weight: 198,
@@ -49,9 +51,31 @@ class Home extends React.Component {
                 }
             ]
         }
-
         this.onSignOut = this.onSignOut.bind(this);
         this.showTraineeSummary = this.showTraineeSummary.bind(this);
+    }
+
+    async componentDidMount() {
+        console.log('mounted');
+        let value = await AsyncStorage.getItem('user');
+        let currentUser = JSON.parse(value);
+        let userData = database.ref('users').child(currentUser.uid);
+        let snapshot = await userData.once('value');
+        let students = snapshot.val().students;
+        let traineeList = [];
+        for (i = students.length - 1; i >= 0; --i) {
+            let studentData = database.ref('users').child(students[i]);
+            let studentVal = await studentData.once('value');
+            let student = studentVal.val();
+            traineeList.push(student);
+        }
+        this.setState({
+            traineeList: traineeList
+        });
+    }
+
+    componentDidUpdate() {
+        console.log('updating');
     }
 
     onSignOut() {
