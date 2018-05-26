@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 
 import React from 'react';
 var { View, StyleSheet, Alert, Text } = require('react-native');
