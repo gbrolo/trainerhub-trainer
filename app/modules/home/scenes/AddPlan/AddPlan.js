@@ -11,6 +11,7 @@ import { actions as auth, theme } from "../../../auth/index"
 const { signOut } = auth;
 
 const { color } = theme;
+import { database, provider } from '../../../../config/firebase';
 
 class AddPlan extends React.Component {
     constructor(props){
@@ -27,16 +28,29 @@ class AddPlan extends React.Component {
         Alert.alert('Oops!', error.message);
     }
 
-    goHome() {
-        console.log('plans before', this.props.plans);
+    async goHome() {
         // send data here to firebase
-        var currentPlans = this.props.plans;
+        let userUid = this.props.uid;
         var newPlan = {
             pname: this.state.pname,
             pdescription: this.state.pdescription
         }
-        currentPlans.push(newPlan)
-        console.log('plans', currentPlans);
+        let userData = database.ref('users').child(userUid);
+        let snapshot = await userData.once('value');
+        let plans = snapshot.val().plans;
+        if (plans) {
+            plans.push(newPlan);
+        } else {
+            plans = [];
+            plans.push(newPlan);
+        }
+        userData.update({
+            plans: plans
+        }).then(() => {
+            alert('Plan agregado con exito');
+        }).catch((err) => {
+            console.log(err);
+        });
         Actions.Home();
     }
 

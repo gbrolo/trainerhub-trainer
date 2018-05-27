@@ -5,12 +5,8 @@ import {Button, ButtonGroup, List, ListItem, Icon, Divider, CheckBox, FormLabel,
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
-import styles from "./styles"
-
-import { actions as auth, theme } from "../../../auth/index"
-const { signOut } = auth;
-
-const { color } = theme;
+import styles from './styles';
+import { database, provider } from '../../../../config/firebase';
 
 class AddTraining extends React.Component {
     constructor(props){
@@ -21,7 +17,7 @@ class AddTraining extends React.Component {
             tcomments: '',
             treps: 0,
             tsets: 0
-        }
+        };
 
         this.goHome = this.goHome.bind(this);
     }
@@ -30,18 +26,34 @@ class AddTraining extends React.Component {
         Alert.alert('Oops!', error.message);
     }
 
-    goHome() {
+    async goHome() {
         // send data here to firebase
-        var currentTrainings = this.props.trainings;
+        var userUid = this.props.uid;
         var newTraining = {
             tname: this.state.tname,
             tdailyDuration: this.state.tdailyDuration,
             tcomments: this.state.tcomments,
             treps: this.state.treps,
             tsets: this.state.tsets
+        };
+
+        let userData = database.ref('users').child(userUid);
+        let snapshot = await userData.once('value');
+        let trainings = snapshot.val().trainings;
+        if (trainings) {
+            trainings.push(newTraining);
+        } else {
+            trainings = [];
+            trainings.push(newTraining);
         }
-        currentTrainings.push(newTraining)
-        console.log('trainings', currentTrainings);
+        userData.update({
+            trainings: trainings
+        }).then(() => {
+            alert('Entrenamiento agregado con exito');
+        }).catch((err) => {
+            console.log(err);
+        });
+
         Actions.Home();
     }
 
